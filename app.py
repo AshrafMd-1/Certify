@@ -9,7 +9,7 @@ from utils.logout import clear_session
 if "user_data" not in st.session_state:
     st.session_state.user_data = {}
 
-if st.session_state.user_data['access'] is not None:    
+if st.session_state.user_data['access'] is not None:
     clear_session()
     st.success("You have been logged out")
     time.sleep(1)
