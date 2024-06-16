@@ -1,6 +1,6 @@
 import streamlit as st
 
-from config.db import events_db, participants_db
+from config.db import events_db, participants_db, certificate_db, templates_db
 from config.menu import menu_with_redirect
 from utils.common import wide_table
 
@@ -33,4 +33,9 @@ else:
             st.write("Participants")
             participants = participants_db.get(event_data["key"])
             part = participants["participants"]
-            st.dataframe(part,use_container_width=True)
+            st.dataframe(part, use_container_width=True)
+
+        if event_data["extension"] is not None:
+            st.write("Certificates")
+            certificate = templates_db.get(f"{event_data['key']}.{event_data['extension']}")
+            st.image(certificate.read(), use_column_width=True)

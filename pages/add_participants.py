@@ -9,8 +9,8 @@ from utils.common import convert_to_uppercase, capitalize_name
 
 menu_with_redirect()
 
-st.header("Events")
-st.write("You can view all the events here")
+st.header("Add Participants")
+st.write("You can add participants to an event here")
 all_event_data = events_db.fetch()
 all_events_name = []
 if not all_event_data is None and not all_event_data.count == 0:

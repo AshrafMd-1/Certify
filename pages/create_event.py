@@ -24,7 +24,7 @@ with st.form("create_event_form"):
                 "name": event_name_new,
                 "detail": event_detail_new,
                 "participant_count": None,
-                "certificate": None
+                "extension": None,
             })
             st.success("Event created successfully")
             time.sleep(1)
