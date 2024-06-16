@@ -12,6 +12,17 @@ st.write("Upload the certificate template")
 if "template_image" not in st.session_state:
     st.session_state.template_image = None
 
+if "event_key" not in st.session_state:
+    st.session_state.event_key = None
+
+if "switch" not in st.session_state:
+    st.session_state.switch = False
+
+if st.session_state.switch:
+    st.session_state.switch = False
+    st.switch_page("pages/customise_certificate.py")
+
+all_events_data=[]
 all_event_data = events_db.fetch()
 all_events_name = []
 if not all_event_data is None and not all_event_data.count == 0:
@@ -26,13 +37,10 @@ else:
         event_data = [event_data for event_data in all_event_data.items if event_data["key"] == event.split(" | ")[0]]
         event_data = event_data[0]
         if event_data["extension"] is not None:
-            certificate = templates_db.get(f"{event_data['key']}.{event_data['extension']}")
             st.write("Certificate template is uploaded")
-            if st.session_state.template_image is not None:
-                st.image(st.session_state.template_image, use_column_width=True)
-                st.session_state.template_image = None
-            else:
-                st.image(certificate.read(), use_column_width=True)
+            certificate = templates_db.get(f"{event_data['key']}.{event_data['extension']}")
+            st.session_state.template_image = certificate.read()
+            st.image(st.session_state.template_image, use_column_width=True)
             delete_template = st.button("Delete Template")
             if delete_template:
                 certificate_db.delete(event.split(" | ")[0])
@@ -41,11 +49,16 @@ else:
                     "extension": None,
                 }, event.split(" | ")[0])
                 st.success("Template deleted successfully")
+                st.session_state.event_key = None
+                st.session_state.template_image = None
                 time.sleep(1)
                 st.rerun()
-            customise = st.button("Customise Template")
-            if customise:
-                st.write("Customise the template")
+            customise_template = st.button("Customize Template")
+            if customise_template:
+                st.session_state.event_key = event.split(" | ")[0]
+                st.session_state.switch = True
+                st.rerun()
+
         else:
             uploaded_image = st.file_uploader("Choose an image file", type=["png", "jpg", "jpeg"])
             if uploaded_image is not None:
@@ -73,4 +86,5 @@ else:
                         }, event.split(" | ")[0])
                         st.success("Template uploaded successfully")
                         time.sleep(1)
-                    st.rerun()
+                    st.session_state.event_key = event.split(" | ")[0]
+                    st.switch_page("pages/customise_certificate.py")
