@@ -9,6 +9,7 @@ def authenticated_menu():
     st.sidebar.page_link("pages/add_participants.py", label="Add Participants")
     st.sidebar.page_link("pages/add_template.py", label="Add/Customise Template")
     st.sidebar.page_link("pages/get_certificate.py", label="Get Certificate")
+    st.sidebar.page_link("pages/about.py", label="About")
     st.sidebar.page_link("app.py", label="logout")
 
 
@@ -17,6 +18,7 @@ def unauthenticated_menu():
     st.sidebar.divider()
     st.sidebar.page_link("app.py", label="Log in")
     st.sidebar.page_link("pages/get_certificate.py", label="Get Certificate")
+    st.sidebar.page_link("pages/about.py", label="About")
 
 
 def menu():
