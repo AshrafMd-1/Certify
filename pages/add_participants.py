@@ -65,4 +65,4 @@ else:
                     }, event.split(" | ")[0])
                     st.success("Data uploaded successfully")
                     time.sleep(1)
-                    st.switch_page("pages/view_event.py")
+                    st.switch_page("pages/add_template.py")

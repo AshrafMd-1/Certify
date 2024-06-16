@@ -56,6 +56,7 @@ else:
             customise_template = st.button("Customize Template")
             if customise_template:
                 st.session_state.event_key = event.split(" | ")[0]
+                st.session_state.event_extension = event_data["extension"]
                 st.session_state.switch = True
                 st.rerun()
 
@@ -64,7 +65,7 @@ else:
             if uploaded_image is not None:
                 st.image(uploaded_image, use_column_width=True)
                 upload_template = st.button("Upload Template")
-                st.session_state.template_image = uploaded_image
+                st.session_state.template_image = uploaded_image.read()
                 if upload_template:
                     with st.spinner('Saving certificate template...'):
                         extension = uploaded_image.name.split(".")[-1]
@@ -77,11 +78,10 @@ else:
                             "ha": None,
                             "fc": None,
                         }, event.split(" | ")[0])
-                        template_image = templates_db.put(
+                        templates_db.put(
                             f"{certificate_data['key']}.{extension}",
-                            data=uploaded_image.read(),
+                            data=st.session_state.template_image
                         )
-                        st.session_state.template_image = template_image.read()
                         events_db.update({
                             "extension": extension,
                         }, event.split(" | ")[0])

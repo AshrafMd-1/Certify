@@ -64,7 +64,6 @@ else:
             certificate_image_data = certificate_image.read()
             image_source = Image.open(io.BytesIO(certificate_image_data))
             draw = ImageDraw.Draw(image_source)
-            print(current_template)
             cpx = current_template['cpx']
             cpy = current_template['cpy']
             csx = current_template['csx']

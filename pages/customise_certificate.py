@@ -3,7 +3,7 @@ import io
 import streamlit as st
 from PIL import Image, ImageFont, ImageDraw
 
-from config.db import certificate_db
+from config.db import certificate_db, templates_db
 
 if st.session_state.access is None:
     st.switch_page("app.py")
@@ -56,6 +56,7 @@ else:
         cancel = st.button("Cancel")
         if cancel:
             st.session_state.event_key = None
+            st.session_state.event_extension = None
             st.session_state.template_image = None
             st.switch_page("pages/add_template.py")
 
@@ -72,5 +73,6 @@ else:
                 "fc": fc,
             }, st.session_state.event_key)
             st.session_state.event_key = None
+            st.session_state.event_extension = None
             st.session_state.template_image = None
-            st.switch_page("pages/view_events.py")
+            st.switch_page("pages/view_event.py")

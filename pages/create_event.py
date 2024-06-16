@@ -28,4 +28,4 @@ with st.form("create_event_form"):
             })
             st.success("Event created successfully")
             time.sleep(1)
-            st.switch_page("pages/view_event.py")
+            st.switch_page("pages/add_participants.py")
