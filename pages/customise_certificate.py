@@ -14,9 +14,7 @@ if certificate_image is None:
     st.write("No certificate template found")
 else:
     name = st.selectbox("Select a random name", [
-        "6C SAM",
         "10C SAMPLE",
-        "16C SAMPLE IMAGE"
     ])
     image_source = Image.open(io.BytesIO(certificate_image))
     draw = ImageDraw.Draw(image_source)
