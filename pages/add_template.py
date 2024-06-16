@@ -22,7 +22,7 @@ if st.session_state.switch:
     st.session_state.switch = False
     st.switch_page("pages/customise_certificate.py")
 
-all_events_data=[]
+all_events_data = []
 all_event_data = events_db.fetch()
 all_events_name = []
 if not all_event_data is None and not all_event_data.count == 0:
@@ -77,7 +77,7 @@ else:
                             "ha": None,
                             "fc": None,
                         }, event.split(" | ")[0])
-                        templates_db.put(
+                        st.session_state.template_image = templates_db.put(
                             f"{certificate_data['key']}.{extension}",
                             data=uploaded_image.read(),
                         )
