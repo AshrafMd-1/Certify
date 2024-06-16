@@ -16,7 +16,7 @@ else:
     name = st.selectbox("Select a random name", [
         "10C SAMPLE",
     ])
-    image_source = Image.open(io.BytesIO(certificate_image))
+    image_source = Image.open(io.BytesIO(certificate_image.read()))
     draw = ImageDraw.Draw(image_source)
 
     image_size = image_source.size

@@ -77,10 +77,11 @@ else:
                             "ha": None,
                             "fc": None,
                         }, event.split(" | ")[0])
-                        st.session_state.template_image = templates_db.put(
+                        template_image = templates_db.put(
                             f"{certificate_data['key']}.{extension}",
                             data=uploaded_image.read(),
                         )
+                        st.session_state.template_image = template_image.read()
                         events_db.update({
                             "extension": extension,
                         }, event.split(" | ")[0])
