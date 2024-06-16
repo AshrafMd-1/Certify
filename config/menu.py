@@ -6,6 +6,7 @@ def authenticated_menu():
     st.sidebar.page_link("pages/profile.py", label="Profile")
     st.sidebar.page_link("pages/create_event.py", label="Create Event")
     st.sidebar.page_link("pages/view_event.py", label="View Events")
+    st.sidebar.page_link("pages/add_participants.py", label="Add Participants")
     st.sidebar.page_link("app.py", label="logout")
 
 

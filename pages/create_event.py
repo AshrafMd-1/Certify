@@ -23,7 +23,7 @@ with st.form("create_event_form"):
             events_db.put({
                 "name": event_name_new,
                 "detail": event_detail_new,
-                "participant": None,
+                "participant_count": None,
                 "certificate": None
             })
             st.success("Event created successfully")

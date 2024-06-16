@@ -1,6 +1,6 @@
 import streamlit as st
 
-from config.db import events_db
+from config.db import events_db, participants_db
 from config.menu import menu_with_redirect
 from utils.common import wide_table
 
@@ -19,10 +19,18 @@ else:
     event = st.selectbox("Select an event", all_events_name, index=None,
                          placeholder="Select an event")
 
-    event_data = [
-        event_data for event_data in all_event_data.items if event_data["key"] == event.split(" | ")[0]]
-    event_data = event_data[0]
+    if event:
 
-    wide_table(["Title", "Detail"],
-               [event_data["name"], event_data["detail"]]
-               )
+        event_data = [
+            event_data for event_data in all_event_data.items if event_data["key"] == event.split(" | ")[0]]
+        event_data = event_data[0]
+
+        wide_table(["Title", "Detail", "Participants Count"],
+                   [event_data["name"], event_data["detail"], event_data["participant_count"]]
+                   )
+
+        if event_data["participant_count"] is not None:
+            st.write("Participants")
+            participants = participants_db.get(event_data["key"])
+            part = participants["participants"]
+            st.dataframe(part,use_container_width=True)
