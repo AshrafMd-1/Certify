@@ -38,7 +38,6 @@ def wide_table(headers, values, link=False, link_text="Click Here"):
     st.html(table_html)
 
 
-
 def clear_session():
     for key in st.session_state.keys():
         del st.session_state[key]
